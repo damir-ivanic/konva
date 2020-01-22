@@ -9,12 +9,13 @@ const Layering = () => {
     const [image] = useImage("https://st3.depositphotos.com/4447003/16898/i/1600/depositphotos_168986880-stock-photo-a-view-from-above-on.jpg")
 
     const handlePlacement = event => {
+        const stage = event.target.getStage();
         stageRef.current.setPointersPositions(event);
         setSections([...sections, {
-            ...stageRef.current.getPointerPosition()
+            ...stage.getPointerPosition()
         }])
 
-        console.log(stageRef.current, "POINTER POS")
+        console.log(stage, "POINTER POS")
     }
 
     return (
