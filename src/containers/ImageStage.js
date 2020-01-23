@@ -1,21 +1,20 @@
 import React, { useState } from 'react'
 import { Stage, Layer, Image } from 'react-konva'
 import useImage from 'use-image';
-import Numbers from './Numbers';
+import Numbers from '../Numbers';
+import Konva from 'konva';
 
-const Layering = () => {
+const ImageStage = () => {
     const [sections, setSections] = useState([]);
     const stageRef = React.useRef();
+    const layerRef = React.useRef();
     const [image] = useImage("https://st3.depositphotos.com/4447003/16898/i/1600/depositphotos_168986880-stock-photo-a-view-from-above-on.jpg")
 
-    const handlePlacement = event => {
-        const stage = event.target.getStage();
-        stageRef.current.setPointersPositions(event);
+    const handlePlacement = e => {
+        const { clientX, clientY } = e.evt;
         setSections([...sections, {
-            ...stage.getPointerPosition()
+            x: clientX, y: clientY
         }])
-
-        console.log(stage, "POINTER POS")
     }
 
     return (
@@ -24,9 +23,8 @@ const Layering = () => {
             height={window.innerHeight}
             style={{ border: '1px solid grey' }}
             ref={stageRef}
-            onClick={handlePlacement}
         >
-            <Layer>
+            <Layer ref={layerRef} onClick={handlePlacement}>
                 <Image image={image}>
 
                 </Image>
@@ -40,4 +38,4 @@ const Layering = () => {
     )
 }
 
-export default Layering
+export default ImageStage

@@ -1,11 +1,11 @@
 import React from 'react';
-import Layering from './Layering';
+import ImageStage from './containers/ImageStage';
 
 function App() {
   return (
     <div className="App">
         Damir
-        <Layering />
+        <ImageStage />
     </div>
   );
 }
